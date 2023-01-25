@@ -40,6 +40,12 @@ def create_project(project_name, project_description, project_path):
         subprocess.run(["poetry", "config", "virtualenvs.in-project", "true"])
     os.chdir(project_name)
     base_directory = os.getcwd()
+    # Set projectname/projectname/ folder as cwd
+    os.chdir(os.path.join(base_directory, project_name))
+    # Generate main.py file
+    with open("main.py", "w") as f:
+        f.write(f'# {project_name} main file. Run this file to start the application. The Dockerfile is also preconfigured to run this file.')
+    print("Generated main.py file...")
     # Add packages using poetry
     subprocess.run(
         ["poetry", "add", "flake8", "black", "radon", "bandit", "isort", "mypy"]
