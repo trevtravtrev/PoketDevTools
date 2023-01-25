@@ -44,7 +44,9 @@ def create_project(project_name, project_description, project_path):
     os.chdir(os.path.join(base_directory, project_name))
     # Generate main.py file
     with open("main.py", "w") as f:
-        f.write(f'# {project_name} main file. Run this file to start the application. The Dockerfile is also preconfigured to run this file.')
+        f.write(
+            f"# {project_name} main file. Run this file to start the application. The Dockerfile is also preconfigured to run this file."
+        )
     print("Generated main.py file...")
     # Add packages using poetry
     subprocess.run(
