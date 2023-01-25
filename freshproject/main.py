@@ -1,6 +1,6 @@
+import os
 import subprocess
 import sys
-import os
 
 
 def check_poetry():
@@ -20,13 +20,13 @@ def create_gitignore(base_directory):
     gitignore_path = os.path.join(base_directory, gitignore_file)
     # Download the Python gitignore template
     subprocess.run(["curl", "-o", gitignore_path, gitignore_url])
-    # Add the .idea and venv folders to the ignore list
+    # Add the .idea and venv folders to the .gitignore list
     with open(gitignore_path, "a") as f:
         f.write("\n# Project-specific ignores\n")
         f.write("*.idea\n")
 
 
-def create_project(project_name, project_path):
+def create_project(project_name, project_description, project_path):
     os.chdir(project_path)
     # Check if poetry is installed
     if not check_poetry():
@@ -73,12 +73,24 @@ EXPOSE 8000
 # Run the command to start the application
 CMD ["poetry", "run", "python", "main.py"]"""
         )
+    # Go back to base directory
+    os.chdir(base_directory)
+    # add project name and project description to README.md
+    with open("README.md", "w") as f:
+        f.write(
+            f"""# {project_name}
+{project_description}
+"""
+        )
 
 
 def main():
     project_name = input("Enter the project name: ")
-    project_path = input("Enter the target absolute path to create the project directory in: ")
-    create_project(project_name, project_path)
+    project_description = input("(Optional) Enter project description: ")
+    project_path = input(
+        "Enter the target absolute path to create the project directory in: "
+    )
+    create_project(project_name, project_description, project_path)
     print("Complete.")
 
 
