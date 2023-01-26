@@ -32,12 +32,12 @@ def create_project(project_name, project_description, project_path):
     if not check_poetry():
         subprocess.run([sys.executable, "-m", "pip", "install", "poetry"])
     if not os.path.exists(project_name):
-        # Create new project using Poetry
-        subprocess.run(["poetry", "new", project_name])
         # Workaround for bug where poetry created venv did not work
         subprocess.run(["poetry", "config", "virtualenvs.path", "--unset"])
         # Setting to make venv inside project directory
         subprocess.run(["poetry", "config", "virtualenvs.in-project", "true"])
+        # Create new project using Poetry
+        subprocess.run(["poetry", "new", project_name])
     os.chdir(project_name)
     base_directory = os.getcwd()
     # Set projectname/projectname/ folder as cwd
@@ -45,7 +45,7 @@ def create_project(project_name, project_description, project_path):
     # Generate main.py file
     with open("main.py", "w") as f:
         f.write(
-            f"# {project_name} main file. Run this file to start the application. The Dockerfile is also preconfigured to run this file."
+            f"# {project_name} main file. Run this file to start the application. The Dockerfile is also preconfigured to run this file.\n"
         )
     print("Generated main.py file...")
     # Add packages using poetry
