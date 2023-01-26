@@ -50,7 +50,7 @@ def create_project(project_name, project_description, project_path):
     print("Generated main.py file...")
     # Add packages using poetry
     subprocess.run(
-        ["poetry", "add", "flake8", "black", "radon", "bandit", "isort", "mypy"]
+        ["poetry", "add", "poetry", "flake8", "black", "radon", "bandit", "isort", "mypy"]
     )
     # Go back to base directory
     os.chdir(base_directory)
