@@ -7,4 +7,4 @@ Each tool has its own README.
 
 To run each tool just run main.py in the tool's subfolder.  
 
-Ironically enough, the projectgenerator tool generated the PoketDevTools project it is a child of.  
+The projectgenerator tool generated this PoketDevTools project it is a child of, and the autolinter linted and formatted this project it is a child of.  
