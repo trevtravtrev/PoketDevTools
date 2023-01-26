@@ -14,7 +14,6 @@ bandit = "^1.7.4"
 isort = "^5.11.4"
 mypy = "^0.991"
 
-
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
