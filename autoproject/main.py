@@ -1,6 +1,7 @@
 import os
 import subprocess
 import sys
+import logomaker
 
 
 def check_poetry():
@@ -26,7 +27,7 @@ def create_gitignore(base_directory):
         f.write("*.idea\n")
 
 
-def create_project(project_name, project_description, project_path):
+def create_project(project_name, project_description, complex_readme, project_path, github_username):
     os.chdir(project_path)
     # Check if poetry is installed
     if not check_poetry():
@@ -40,6 +41,8 @@ def create_project(project_name, project_description, project_path):
         subprocess.run(["poetry", "new", project_name])
     os.chdir(project_name)
     base_directory = os.getcwd()
+    logomaker.generate_logo(text=project_name, font="Segoe UI", width=500, height=100)
+    print("Generated logo.")
     # Set projectname/projectname/ folder as cwd
     os.chdir(os.path.join(base_directory, project_name))
     # Generate main.py file
@@ -83,22 +86,46 @@ CMD ["poetry", "run", "python", "main.py"]"""
         )
     # Go back to base directory
     os.chdir(base_directory)
-    # add project name and project description to README.md
+    # generate readme
     with open("README.md", "w") as f:
-        f.write(
-            f"""# {project_name}
-{project_description}
-"""
-        )
+        # TODO: add complex readme
+        if complex_readme:
+            f.write("")
+        else:
+            f.write(
+                f"""# <br />
+<div align="center">
+  <a href="https://github.com/{github_username}/{project_name}">
+    <img src="logo.png" alt="{project_name}" width="500" height="100">
+  </a>
+
+  <p align="center">
+    {project_description}
+    <br />
+    <a href="https://github.com/{github_username}/{project_name}/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/{github_username}/{project_name}/issues">Request Feature</a>
+  </p>
+</div>
+    """
+            )
 
 
 def main():
     project_name = input("Enter the project name: ")
     project_description = input("(Optional) Enter project description: ")
+    while True:
+        complex_readme = int(input("Enter 0 for simple readme or 1 for complex readme: "))
+        if complex_readme not in [1, 0]:
+            print("Invalid option.")
+            continue
+        else:
+            break
+    github_username = input("Enter your github username: ")
     project_path = input(
         "Enter the target absolute path to create the project directory in: "
     )
-    create_project(project_name, project_description, project_path)
+    create_project(project_name, project_description, complex_readme, project_path, github_username)
     print("Complete.")
 
 
