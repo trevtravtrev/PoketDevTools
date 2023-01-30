@@ -18,17 +18,34 @@ def generate_logo(text, font, width, height):
     ctx.set_font_size(font_size)
 
     # Get the text extents
-    x_bearing, y_bearing, text_width, text_height, x_advance, y_advance = ctx.text_extents(text)
+    (
+        x_bearing,
+        y_bearing,
+        text_width,
+        text_height,
+        x_advance,
+        y_advance,
+    ) = ctx.text_extents(text)
 
     # Check if the text is too wide for the image
     while text_width > width or text_height > height:
         # Decrease the font size
         font_size -= 1
         ctx.set_font_size(font_size)
-        x_bearing, y_bearing, text_width, text_height, x_advance, y_advance = ctx.text_extents(text)
+        (
+            x_bearing,
+            y_bearing,
+            text_width,
+            text_height,
+            x_advance,
+            y_advance,
+        ) = ctx.text_extents(text)
 
     # center the text horizontally and vertically
-    ctx.move_to((width / 2) - (text_width / 2) - x_bearing, (height / 2) - (text_height / 2) - y_bearing)
+    ctx.move_to(
+        (width / 2) - (text_width / 2) - x_bearing,
+        (height / 2) - (text_height / 2) - y_bearing,
+    )
 
     # Draw the text
     ctx.show_text(text)
@@ -39,4 +56,3 @@ def generate_logo(text, font, width, height):
 
 if __name__ == "__main__":
     generate_logo(text="Pi-X", font="Segoe UI", width=500, height=100)
-

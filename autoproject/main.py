@@ -1,6 +1,7 @@
 import os
 import subprocess
 import sys
+
 import logomaker
 
 
@@ -27,7 +28,9 @@ def create_gitignore(base_directory):
         f.write("*.idea\n")
 
 
-def create_project(project_name, project_description, complex_readme, project_path, github_username):
+def create_project(
+    project_name, project_description, poketdev_readme, project_path, github_username
+):
     os.chdir(project_path)
     # Check if poetry is installed
     if not check_poetry():
@@ -42,7 +45,7 @@ def create_project(project_name, project_description, complex_readme, project_pa
     os.chdir(project_name)
     base_directory = os.getcwd()
     logomaker.generate_logo(text=project_name, font="Segoe UI", width=500, height=100)
-    print("Generated logo.")
+    print("Generated logo...")
     # Set projectname/projectname/ folder as cwd
     os.chdir(os.path.join(base_directory, project_name))
     # Generate main.py file
@@ -53,7 +56,17 @@ def create_project(project_name, project_description, complex_readme, project_pa
     print("Generated main.py file...")
     # Add packages using poetry
     subprocess.run(
-        ["poetry", "add", "poetry", "flake8", "black", "radon", "bandit", "isort", "mypy"]
+        [
+            "poetry",
+            "add",
+            "poetry",
+            "flake8",
+            "black",
+            "radon",
+            "bandit",
+            "isort",
+            "mypy",
+        ]
     )
     # Go back to base directory
     os.chdir(base_directory)
@@ -88,8 +101,8 @@ CMD ["poetry", "run", "python", "main.py"]"""
     os.chdir(base_directory)
     # generate readme
     with open("README.md", "w") as f:
-        # TODO: add complex readme
-        if complex_readme:
+        # TODO: add poketdev readme
+        if poketdev_readme:
             f.write("")
         else:
             f.write(
@@ -103,7 +116,7 @@ CMD ["poetry", "run", "python", "main.py"]"""
     {project_description}
     <br />
     <a href="https://github.com/{github_username}/{project_name}/issues">Report Bug</a>
-    ·
+     | 
     <a href="https://github.com/{github_username}/{project_name}/issues">Request Feature</a>
   </p>
 </div>
@@ -112,20 +125,24 @@ CMD ["poetry", "run", "python", "main.py"]"""
 
 
 def main():
-    project_name = input("Enter the project name: ")
-    project_description = input("(Optional) Enter project description: ")
+    project_name = input("Project name: ")
+    project_description = input("Project description: ")
     while True:
-        complex_readme = int(input("Enter 0 for simple readme or 1 for complex readme: "))
-        if complex_readme not in [1, 0]:
+        poketdev_readme = int(input("Readme (1 for PocketDev, 0 for regular): "))
+        if poketdev_readme not in [1, 0]:
             print("Invalid option.")
             continue
         else:
             break
-    github_username = input("Enter your github username: ")
-    project_path = input(
-        "Enter the target absolute path to create the project directory in: "
+    github_username = input("Github Username: ")
+    project_path = input("Project Target Path: ")
+    create_project(
+        project_name,
+        project_description,
+        poketdev_readme,
+        project_path,
+        github_username,
     )
-    create_project(project_name, project_description, complex_readme, project_path, github_username)
     print("Complete.")
 
 
