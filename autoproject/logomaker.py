@@ -1,4 +1,3 @@
-# logomaker main file. Run this file to start the application. The Dockerfile is also preconfigured to run this file.
 import cairo
 
 
