@@ -131,7 +131,7 @@ CMD ["poetry", "run", "python", "main.py"]"""
   </p>
 </div>
 
-<details>
+<details open>
   <summary>Table of Contents</summary>
   <ol>
     <li><a href="#contact">Contact</a></li>
