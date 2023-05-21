@@ -37,6 +37,7 @@ def create_requirements_txt(base_directory):
 def create_project(
     project_name, project_description, poketdev_readme, project_path, github_username
 ):
+    docker_image_name = project_name.lower()
     os.chdir(project_path)
     # Check if poetry is installed
     if not check_poetry():
@@ -93,7 +94,7 @@ def create_project(
     # Create Dockerfile
     with open("Dockerfile", "w") as f:
         f.write(
-            f"""FROM python:3.10-alpine
+            f"""FROM python:alpine
 
 # Install Poetry
 RUN pip install poetry
@@ -166,16 +167,16 @@ For any project-related questions, bug fixes, feature requests, or communication
 
 Docker is a free tool that simplifies the process of running applications by packaging them with everything they need, so you can easily move them between different machines and ensure they work quickly and consistently, saving you time and reducing potential conflicts. If you're not familiar with docker, we STRONGLY recommend taking a few minutes to become familiar [here](https://www.docker.com/blog/getting-started-with-docker-desktop/#:~:text=Docker%20Desktop%20is%20an%20easy,%2C%20Kubernetes%2C%20and%20Credential%20Helper.).  
 1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) (if not already installed)
-
-2. Build the Docker image:
+2. Open Docker Desktop
+3. Build the Docker image:
 ```
 cd {project_name}
-docker build -t {project_name} .
+docker build -t {docker_image_name} .
 ```
 
-3. Run the Docker container:
+4. Run the Docker container:
 ```
-docker run {project_name}
+docker run {docker_image_name}
 ```
 ## Option 2: Poetry
 1. Install Poetry (if not already installed)
@@ -251,7 +252,7 @@ If you'd like to refer someone to Poket Dev, and they subscribe to any of our pa
 
 
 def main():
-    project_name = input("Project name (no whitespace, hyphens, or underscores): ")
+    project_name = input("Project name (CamelCase): ")
     project_description = input("Project description: ")
     while True:
         poketdev_readme = int(input("README (0 for personal, 1 for Poket Dev): "))
