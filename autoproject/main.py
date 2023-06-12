@@ -227,9 +227,9 @@ All {project_name} code was formatted, linted, and secured with the following to
 - [mypy](https://mypy.readthedocs.io/en/stable/)
 
 # Thank you for choosing Poket Dev!
-Thank you for choosing Poket Dev, LLC as your unlimited software development partner. We greatly appreciate you and are committed to delivering exceptional solutions and exceeding your expectations.  
+Thank you for choosing Poket Dev, LLC (www.PoketDev.com) as your unlimited software development partner. We greatly appreciate you and are committed to delivering exceptional solutions and exceeding your expectations.  
 
-If you'd like to refer someone to Poket Dev, and they subscribe to any of our packages, you'll receive a $1000 referral bonus.  """
+If you'd like to refer someone to Poket Dev, and they subscribe to any of our packages, you'll receive a $500 referral bonus.  """
             )
         else:
             f.write(
