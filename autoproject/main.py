@@ -140,7 +140,7 @@ CMD ["poetry", "run", "python", "main.py"]"""
     <li><a href="#clone-the-repository">Clone the Repository</a></li>
     <li><a href="#run-the-code">Run the Code</a></li>
     <li><a href="#additional-tools">Additional Tools</a></li>
-    <li><a href="#thank-you-for-choosing-poket-dev!">Thank you for choosing Poket Dev!</a></li>
+    <li><a href="#thank-you-for-choosing-poket-dev">Thank you for choosing Poket Dev!</a></li>
   </ol>
 </details>
 
