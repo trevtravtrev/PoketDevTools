@@ -29,7 +29,12 @@ def run_linters(directory):
 
 
 def main():
-    directory = input("Enter the directory or file path to run linters on: ")
+    for i in range(3):
+        print("""⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️ WARNING ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+Use this tool with extreme caution. Only input the exact directory containing the project's source code—nothing else. 
+Do NOT even include the venv directory.
+✅ Example: project/src/""")
+    directory = input("\nEnter the directory or file path to run linters on: ")
     run_linters(directory)
     print("Linting complete.")
 
